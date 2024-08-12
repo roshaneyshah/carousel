@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podcast Links Carousel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e0e0e0;
+        }
+        .carousel-container {
+            width: 80%;
+            max-width: 700px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            background: #fff;
+            border: 1px solid #ddd;
+        }
+        .carousel-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-item {
+            min-width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            padding: 30px;
+        }
+        .carousel-item img {
+            width: 120px; /* Adjust size as needed */
+            height: auto;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .carousel-item img:hover {
+            transform: scale(1.1);
+        }
+        .carousel-item a {
+            display: block;
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .carousel-item a:hover {
+            color: #007bff;
+        }
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .carousel-controls button {
+            background: rgba(0, 0, 0, 0.3);
+            border: none;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+        .carousel-controls button:hover {
+            background: rgba(0, 0, 0, 0.6);
+        }
+        .carousel-controls button:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <div class="carousel-wrapper">
+            <div class="carousel-item">
+                <a href="https://open.spotify.com/show/5Itfe2YNMpXnjX909fU9gT" target="_blank">
+                    <img src="https://www.freepnglogos.com/uploads/spotify-logo-png/file-spotify-logo-png-4.png" alt="Spotify">
+                    Listen on Spotify
+                </a>
+            </div>
+            <div class="carousel-item">
+                <a href="https://www.youtube.com/@UnlockingVentureCapitalPodcast" target="_blank">
+                    <img src="https://brandslogos.com/wp-content/uploads/images/large/youtube-icon-logo.png" alt="YouTube">
+                    Watch on YouTube
+                </a>
+            </div>
+            <div class="carousel-item">
+                <a href="https://www.linkedin.com/company/unlocking-venture-capital" target="_blank">
+                    <img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png" alt="LinkedIn">
+                    Follow on LinkedIn
+                </a>
+            </div>
+        </div>
+        <div class="carousel-controls">
+            <button id="prev">&#10094;</button>
+            <button id="next">&#10095;</button>
+        </div>
+    </div>
+
+    <script>
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+        const wrapper = document.querySelector('.carousel-wrapper');
+        let index = 0;
+
+        function updateCarousel() {
+            const width = document.querySelector('.carousel-container').offsetWidth;
+            wrapper.style.transform = `translateX(${-index * width}px)`;
+        }
+
+        prevButton.addEventListener('click', () => {
+            index = (index > 0) ? index - 1 : document.querySelectorAll('.carousel-item').length - 1;
+            updateCarousel();
+        });
+
+        nextButton.addEventListener('click', () => {
+            index = (index < document.querySelectorAll('.carousel-item').length - 1) ? index + 1 : 0;
+            updateCarousel();
+        });
+
+        // Initialize carousel
+        updateCarousel();
+    </script>
+</body>
+</html>
